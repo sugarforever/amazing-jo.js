@@ -2,13 +2,15 @@
 
 import { TextField, Button } from '@mui/material';
 import { useState } from 'react';
-import ReactJson from 'react-json-view'
+import ReactMarkdown from 'react-markdown';
+import remarkHtml from 'remark-html';
+import remarkGfm from 'remark-gfm';
 
 export default function Home() {
   const [openaiApiKey, setOpenaiApiKey] = useState('');
   const [recipeUrl, setRecipeUrl] = useState('');
   const [recipe, setRecipe] = useState(null);
-
+  
   const handleSubmit = async (event) => {
     setRecipe(null);
     event.preventDefault();
@@ -41,9 +43,7 @@ export default function Home() {
           </Button>
         </form>
         {recipe !== null && (
-          <div class="mt-4">
-            <ReactJson src={recipe} />
-          </div>
+          <pre>{JSON.stringify(recipe, null, 2)}</pre>
         )}
       </div>
     </main>
