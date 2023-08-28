@@ -30,7 +30,6 @@ export default async function handler(req, res) {
     const openaiApiKey = req.body.openaiApiKey;
     const recipeUrl = req.body.recipeUrl;
     
-    console.log(`openaiApiKey: ${openaiApiKey}`);
     console.log(`recipeUrl: ${recipeUrl}`);
     
     const recipeResponse = await fetch(recipeUrl);
