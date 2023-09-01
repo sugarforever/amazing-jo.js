@@ -3,6 +3,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "pages/api/auth/[...nextauth]"
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,10 +22,10 @@ export default async function RootLayout({ children }) {
           <ul className="flex flex-row gap-3 h-[60px] items-center text-blue-600">
             <li>🥷🏼 {session?.user?.name} </li>
             {!session?.user?.name && (
-              <li><a className="underline" href="/api/auth/signin">sign in</a></li>
+              <li><Link className="underline" href="/api/auth/signin">sign in</Link></li>
             )}
             {session?.user?.name && (
-              <li><a className="underline" href="/api/auth/signout">sign out</a></li>
+              <li><Link className="underline" href="/api/auth/signout">sign out</Link></li>
             )}
           </ul>
         </header>
