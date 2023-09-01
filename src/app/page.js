@@ -2,15 +2,13 @@
 
 import { TextField, Button } from '@mui/material';
 import { useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkHtml from 'remark-html';
-import remarkGfm from 'remark-gfm';
 
 export default function Home() {
+  
   const [openaiApiKey, setOpenaiApiKey] = useState('');
   const [recipeUrl, setRecipeUrl] = useState('');
   const [recipe, setRecipe] = useState(null);
-  
+
   const handleSubmit = async (event) => {
     setRecipe(null);
     event.preventDefault();
@@ -47,5 +45,6 @@ export default function Home() {
         )}
       </div>
     </main>
+
   )
 }
