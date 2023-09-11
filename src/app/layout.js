@@ -7,6 +7,9 @@ import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] })
 
+const pages = ['Prompts'];
+const settings = ['Logout'];
+
 export const metadata = {
   title: "Amazing JO's Recipe",
   description: "Amazing JO's Recipe is the AI powered recipe parse engine.",
@@ -20,6 +23,7 @@ export default async function RootLayout({ children }) {
       <body className={inter.className}>
         <header className="flex flex-col items-center justify-between bg-gray-100">
           <ul className="flex flex-row gap-3 h-[60px] items-center text-blue-600">
+            <li><Link className="underline" href="/prompts">Prompts</Link></li>
             <li>🥷🏼 {session?.user?.name} </li>
             {!session?.user?.name && (
               <li><Link className="underline" href="/api/auth/signin">sign in</Link></li>
