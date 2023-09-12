@@ -11,8 +11,8 @@ const pages = ['Prompts'];
 const settings = ['Logout'];
 
 export const metadata = {
-  title: "Amazing JO's Recipe",
-  description: "Amazing JO's Recipe is the AI powered recipe parse engine.",
+  title: "Amazing JO",
+  description: "Amazing JO is the AI driven services hub that provides useful features to customers.",
 }
 
 export default async function RootLayout({ children }) {
