@@ -92,13 +92,15 @@ export default function Prompt({ session, params }) {
     }
 
     fetchData();
-  }, []);
+  }, [prompt_id]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-white">
       <div className="flex flex-col justify-center w-full max-w-[640px]">
         <h1 className="font-bold text-4xl mb-8">🥑 Amazing Prompt</h1>
-        <ReactMarkdown className="mb-8" children={prompt?.prompt} />
+        <ReactMarkdown className="mb-8">
+          {prompt?.prompt}
+        </ReactMarkdown>
         <form className="flex flex-col gap-4" onSubmit={ask}>
           <TextField
             id="openai-api-key"
@@ -124,7 +126,9 @@ export default function Prompt({ session, params }) {
         </form>
 
         <div>
-          <ReactMarkdown className="mt-4" children={answer} rehypePlugins={rehypeHighlight} />
+          <ReactMarkdown className="mt-4" rehypePlugins={rehypeHighlight}>
+            {answer}
+          </ReactMarkdown>
         </div>
       </div>
     </main>
