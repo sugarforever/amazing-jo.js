@@ -6,6 +6,8 @@ import { useEffect, useState, useMemo, Fragment } from 'react';
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { PromptTemplate } from "langchain/prompts";
 import { HumanMessage } from "langchain/schema";
+import ReactMarkdown from 'react-markdown';
+import rehypeHighlight from 'rehype-highlight';
 
 const extractVariables = (template) => {
   const regex = /{{\s*([\w]+)\s*}}|{\s*([\w]+)\s*}/g;
@@ -96,7 +98,7 @@ export default function Prompt({ session, params }) {
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-white">
       <div className="flex flex-col justify-center w-full max-w-[640px]">
         <h1 className="font-bold text-4xl mb-8">🥑 Amazing Prompt</h1>
-        <Typography mb={4}>{prompt?.prompt}</Typography>
+        <ReactMarkdown className="mb-8" children={prompt?.prompt} />
         <form className="flex flex-col gap-4" onSubmit={ask}>
           <TextField
             id="openai-api-key"
@@ -122,7 +124,7 @@ export default function Prompt({ session, params }) {
         </form>
 
         <div>
-          <Typography mt={4}>{answer}</Typography>
+          <ReactMarkdown className="mt-4" children={answer} rehypePlugins={rehypeHighlight} />
         </div>
       </div>
     </main>

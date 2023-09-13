@@ -1,16 +1,14 @@
 import { getSupabaseClient } from '@/lib/dbutil';
 import { getServerSession } from "next-auth/next"
-import { authOptions } from "../../auth/[...nextauth]"
+import { authOptions } from "../auth/[...nextauth]"
 
-const queryPrompt = async (email, prompt_id) => {
+const queryTokens = async (email) => {
   const supabase = getSupabaseClient();
   try {
     const { data, error } = await supabase
-      .from('prompts')
+      .from('tokens')
       .select('*')
-      .eq('id', prompt_id)
-      .eq('user_name', email)
-      .limit(1);
+      .eq('user_name', email);
 
     return { data, error };
   } catch (error) {
@@ -24,21 +22,19 @@ export default async function handler(req, res) {
 
   const session = await getServerSession(req, res, authOptions)
   const email = session?.user?.email;
-  const { prompt_id } = req.query;
 
   if (req.method === 'GET') {
     if (email) {
-      const { data, error } = await queryPrompt(email, prompt_id);
+      const { data, error } = await queryTokens(email);
       if (error) {
         console.error('Error querying data:', error.message);
         res.status(500).json({
           error: error.message
         })
       } else {
-        const [first] = data;
-        if (first) {
+        if (data) {
           res.status(200).json({
-            prompt: first
+            tokens: data
           });
         } else {
           res.status(404);
