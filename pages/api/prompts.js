@@ -38,14 +38,14 @@ export default async function handler(req, res) {
       res.status(401).json({ error: 'Unauthorized' });
     }
   } else if (req.method === 'POST') {
-    const { prompt } = req.body;
+    const { prompt, name } = req.body;
     if (email) {
       const supabase = getSupabaseClient();
       try {
         const { data, error } = await supabase.from('prompts').insert([
-          { prompt, user_name: email },
+          { prompt, name, user_name: email },
         ]).select();
-        
+
         if (error) {
           console.error('Error inserting data:', error.message);
           res.status(500)

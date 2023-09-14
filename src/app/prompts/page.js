@@ -6,6 +6,7 @@ import { useEffect, useState, useMemo, Fragment } from 'react';
 export default function Prompts({ session }) {
   const [prompts, setPrompts] = useState([]);
   const [prompt, setPrompt] = useState('');
+  const [name, setName] = useState('');
 
   useEffect(() => {
     async function fetchData() {
@@ -36,7 +37,7 @@ export default function Prompts({ session }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ prompt }),
+      body: JSON.stringify({ prompt, name }),
     });
 
     if (response.ok) {
@@ -48,6 +49,7 @@ export default function Prompts({ session }) {
     }
 
     setPrompt('');
+    setName('');
   };
 
   return (
@@ -55,6 +57,12 @@ export default function Prompts({ session }) {
       <div className="flex flex-col justify-center w-full max-w-[640px]">
         <h1 className="font-bold text-4xl mb-8">🥑 Amazing Prompts</h1>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <TextField
+            id="name"
+            arie-label="Give your prompt a name"
+            placeholder="Give your prompt a name"
+            value={name}
+            onChange={(e) => setName(e.target.value)} />
           <TextField
             id="prompt"
             arie-label="Type your prompt here"

@@ -85,7 +85,7 @@ export default function Prompt({ session, params }) {
       if (response.ok) {
         const data = await response.json();
         const { prompt } = data;
-        setPrompt(prompt)
+        setPrompt(prompt);
       } else {
         console.error('Error creating a new prompt');
       }
@@ -97,7 +97,7 @@ export default function Prompt({ session, params }) {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-white">
       <div className="flex flex-col justify-center w-full max-w-[640px]">
-        <h1 className="font-bold text-4xl mb-8">🥑 Amazing Prompt</h1>
+        <h1 className="font-bold text-4xl mb-8">🥑 {prompt?.name || 'Amazing Prompt'}</h1>
         <ReactMarkdown className="mb-8">
           {prompt?.prompt}
         </ReactMarkdown>
@@ -126,7 +126,7 @@ export default function Prompt({ session, params }) {
         </form>
 
         <div>
-          <ReactMarkdown className="mt-4" rehypePlugins={rehypeHighlight}>
+          <ReactMarkdown className="mt-4" rehypePlugins={[rehypeHighlight]}>
             {answer}
           </ReactMarkdown>
         </div>
