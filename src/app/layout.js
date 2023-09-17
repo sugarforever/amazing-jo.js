@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "pages/api/auth/[...nextauth]"
 import Link from 'next/link';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -36,6 +37,7 @@ export default async function RootLayout({ children }) {
         </header>
         <main>
           {children}
+          <Analytics />
         </main>
       </body>
     </html>
